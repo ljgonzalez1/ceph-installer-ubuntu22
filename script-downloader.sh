@@ -15,8 +15,14 @@ else
     fi
 fi
 
+TMP_DIR=$(mktemp -d /tmp/mi_carpeta_XXXXXX)
+
+trap "rm -rf $TEMP_DIR" EXIT
+
+
+cd ${TMP_DIR}
 git clone https://github.com/ljgonzalez1/ceph-installer-ubuntu22
 cd ceph-installer-ubuntu22/modularized_version
-
+git pull
 chmod a+x ./install-ceph.sh
 bash  ./install-ceph.sh
