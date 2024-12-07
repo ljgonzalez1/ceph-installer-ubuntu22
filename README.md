@@ -1,0 +1,1 @@
+# ceph-installer-ubuntu22
