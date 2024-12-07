@@ -15,11 +15,11 @@ check_root_user() {
     crit_error
   fi
 
-  if [ -n "$SUDO_COMMAND" ]; then
-    stop_spinner
-    show_error "This script must be run directly as root, not using 'sudo'."
-    crit_error
-  fi
+  # if [ -n "$SUDO_COMMAND" ]; then
+  #   stop_spinner
+  #   show_error "This script must be run directly as root, not using 'sudo'."
+  #   crit_error
+  # fi
 
   stop_spinner
   show_ok "Running as 'root'"
