@@ -2,7 +2,14 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/messages.sh"
 
-declare -x BRAILLE_SPINNER=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
+declare -x BRAILLE_SPINNER
+if [ "$SPECIAL_CHARACTER_SUPPORT" = true ]; then
+    BRAILLE_SPINNER=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
+
+else
+    BRAILLE_SPINNER=("|" "/" "-" "\")
+fi
+
 declare -x FRAME_DURATION=0.1
 declare -x SPINNER_PID=""
 
@@ -16,7 +23,8 @@ cleanup() {
 trap cleanup SIGINT SIGTERM
 
 show_spinner() {
-    printf "\r${BOLD}[${COLOR_BLUE}%s${RESET}${BOLD}]${RESET} %s" "$1" "$2"
+    printf "
+${BOLD}[${COLOR_BLUE}%s${RESET}${BOLD}]${RESET} %s" "$1" "$2"
 }
 
 start_spinner() {
@@ -39,5 +47,6 @@ stop_spinner() {
         wait "$SPINNER_PID" 2>/dev/null
         unset SPINNER_PID
     fi
-    printf "\r\033[K"
+    printf "
+[K"
 }

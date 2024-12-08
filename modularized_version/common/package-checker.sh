@@ -5,7 +5,30 @@ source "$(dirname "${BASH_SOURCE[0]}")/spinner.sh"
 source "$(dirname "${BASH_SOURCE[0]}")/package-utils.sh"
 
 # Lista de paquetes requeridos
-declare -x REQUIRED_PACKAGES=("sed" "openssh-client" "openssh-server" "ca-certificates" "screen" "dialog" "python3" "curl" "wget" "ncurses-bin")
+declare -x REQUIRED_PACKAGES=(
+  "sed"
+  "dialog"
+  "locales"
+  "grep"
+
+  "gdisk"
+  "lvm2"
+
+  "util-linux"
+  "ncurses-bin"
+  
+  "openssh-client"
+  "openssh-server"
+  
+  "screen"
+  
+  "python3"
+  
+  "curl"
+  "wget"
+  
+  "ca-certificates"
+  )
 
 check_dependencies() {
   echo -e "${BOLD}## Checking dependencies...${RESET}"

@@ -23,7 +23,8 @@ set_hostname() {
 dialog --title "Hostname Configuration" \
     --no-cancel \
     --ok-label "OK" \
-    --inputbox "${validation_message}Enter the hostname for this node:\n(Leave empty to keep current):" 15 70 "$current_hostname" 2>"$TEMP_NEW_HOSTNAME"
+    --inputbox "${validation_message}Enter the hostname for this node:
+(Leave empty to keep current):" 15 70 "$current_hostname" 2>"$TEMP_NEW_HOSTNAME"
 EOF
         chmod +x "$TEMP_SCREEN_SCRIPT"
 
@@ -32,7 +33,8 @@ EOF
         screen -q -r hostname_session
 
         # Mover el cursor hacia arriba y borrar la línea
-        printf "\033[A\r\033[K"
+        printf "[A
+[K"
 
         # Leer el hostname ingresado
         new_hostname=$(<"$TEMP_NEW_HOSTNAME")
@@ -48,7 +50,13 @@ EOF
         if [[ "$new_hostname" =~ ^[a-zA-Z0-9][a-zA-Z0-9\._-]{1,253}[a-zA-Z0-9]$ && ${#new_hostname} -ge 3 && ${#new_hostname} -le 255 ]]; then
             is_valid=1
         else
-            validation_message="Invalid hostname:\n- 3-255 characters.\n- Only letters, numbers, dots (.), hyphens (-) and underscores (_).\n- Must start and end with letter or number.\n- Middle section can be 1-253 characters.\n\n"
+            validation_message="Invalid hostname:
+- 3-255 characters.
+- Only letters, numbers, dots (.), hyphens (-) and underscores (_).
+- Must start and end with letter or number.
+- Middle section can be 1-253 characters.
+
+"
         fi
     done
 
@@ -65,15 +73,15 @@ EOF
     tmpfile=$(mktemp)
 
     while IFS= read -r line; do
-        if echo "$line" | grep -q "\b$current_hostname\b"; then
-            updated_line=$(echo "$line" | sed "s/\b$current_hostname\b/$new_hostname/g")
+        if echo "$line" | grep -q "$current_hostname"; then
+            updated_line=$(echo "$line" | sed "s/$current_hostname/$new_hostname/g")
             echo "$updated_line" >> "$tmpfile"
         else
             echo "$line" >> "$tmpfile"
         fi
     done < /etc/hosts
 
-    sed -i "/^127\.0\.1\.1\b/d" "$tmpfile"
+    sed -i "/^127\.0\.1\.1/d" "$tmpfile"
     echo "127.0.1.1 $new_hostname.local $new_hostname" >> "$tmpfile"
 
     mv "$tmpfile" /etc/hosts

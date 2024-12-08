@@ -2,16 +2,23 @@
 
 SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 
-source "${SCRIPT_DIR}/signature.sh"
-source "${SCRIPT_DIR}/messages.sh"
-source "${SCRIPT_DIR}/root-checker.sh"
-source "${SCRIPT_DIR}/package-checker.sh"
-source "${SCRIPT_DIR}/package-installer.sh"
-source "${SCRIPT_DIR}/installation-checker.sh"
-source "${SCRIPT_DIR}/hostname-selector.sh"
-source "${SCRIPT_DIR}/docker-installer.sh"
-source "${SCRIPT_DIR}/root-password.sh"
-source "${SCRIPT_DIR}/network-configuration.sh"
+source "${SCRIPT_DIR}/common/special-character-support.sh"
+source "${SCRIPT_DIR}/common/signature.sh"
+source "${SCRIPT_DIR}/common/messages.sh"
+source "${SCRIPT_DIR}/common/root-checker.sh"
+source "${SCRIPT_DIR}/common/package-checker.sh"
+source "${SCRIPT_DIR}/common/package-installer.sh"
+source "${SCRIPT_DIR}/common/installation-checker.sh"
+source "${SCRIPT_DIR}/common/hostname-selector.sh"
+source "${SCRIPT_DIR}/common/docker-installer.sh"
+source "${SCRIPT_DIR}/common/root-password.sh"
+source "${SCRIPT_DIR}/common/network-configuration.sh"
+source "${SCRIPT_DIR}/common/ssh-setup.sh"
+source "${SCRIPT_DIR}/common/disk-selector.sh"
+source "${SCRIPT_DIR}/common/disk-cleaner.sh"
+source "${SCRIPT_DIR}/common/node-type-selector.sh"
+source "${SCRIPT_DIR}/common/ntp-checker.sh"
+
 
 cleanup() {
     stop_spinner
@@ -23,8 +30,10 @@ cleanup() {
 trap cleanup SIGINT SIGTERM
 
 main() {
-    show_signature
+    test_special_character_support
 
+    show_signature
+    
     check_root_user
 
     if ! check_dependencies; then
@@ -39,13 +48,24 @@ main() {
         cleanup
     fi
 
-    echo
-
     setup_network
+
+    echo
 
     setup_root_password
 
     install_docker
+
+    setup_ssh
+
+    select_ceph_disks
+
+    clean_selected_disks
+
+    check_time_sync
+
+    ask_for_node_type
+    
 }
 
 echo

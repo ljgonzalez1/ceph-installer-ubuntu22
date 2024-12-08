@@ -54,7 +54,7 @@ EOF
     screen -q -dmS dialog_session bash "$TEMP_SCREEN_SCRIPT"
     screen -q -r dialog_session
     
-    printf "\033[A\033[K"
+    printf "[A[K"
     
     RESPONSE=$(<"$DIALOG_OUTPUT")
     rm -f "$DIALOG_OUTPUT" "$TEMP_SCREEN_SCRIPT"
@@ -128,7 +128,7 @@ EOF
         DIALOG_EXIT_CODE=$?
         
         # Mover el cursor
-        printf "\033[A\033[K"
+        printf "[A[K"
         
         # Manejar la cancelación según el caso
         if [[ "$DIALOG_EXIT_CODE" -eq 1 ]]; then
@@ -219,7 +219,7 @@ EOF
         screen -q -dmS dialog_session bash "$TEMP_SCREEN_SCRIPT"
         screen -q -r dialog_session
         
-        printf "\033[A\033[K"
+        printf "[A[K"
         
         RESPONSE=$(<"$DIALOG_OUTPUT")
         rm -f "$DIALOG_OUTPUT" "$TEMP_SCREEN_SCRIPT"

@@ -13,7 +13,7 @@ ask_installation_requirements() {
     cat << EOF > "$TEMP_SCREEN_SCRIPT"
 #!/usr/bin/env bash
 dialog --title "Ceph Installation" --yesno \
-"Ceph installation requires Docker and Cephadm. Do you wish to proceed?" 10 60
+"Ceph installation requires Docker and Cephadm, modify your nameservers and replace your netplan. Do you wish to proceed?" 12 60
 echo \$? > "$DIALOG_OUTPUT"
 EOF
 
@@ -24,7 +24,8 @@ EOF
     screen -q -r dialog_session
 
     # Mover el cursor hacia arriba y borrar la línea
-    printf "\033[A\r\033[K"
+    printf "[A
+[K"
 
     # Leer el resultado del diálogo
     if [[ -f "$DIALOG_OUTPUT" ]]; then
