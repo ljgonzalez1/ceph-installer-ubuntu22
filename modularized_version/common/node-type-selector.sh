@@ -8,4 +8,5 @@ ask_for_node_type() {
 
     # < > Ok
     # < > Cancel (stops de script with error)
+    true
 }

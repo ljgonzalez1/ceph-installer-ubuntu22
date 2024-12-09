@@ -171,7 +171,7 @@ select_ceph_disks() {
     DIALOG_OUTPUT=$(mktemp /tmp/dialog_output.XXXXXX)
 
     # Crear script para dialog
-    cat << EOF > "$TEMP_SCREEN_SCRIPT"
+    cat << 'EOF' > "$TEMP_SCREEN_SCRIPT"
 #!/usr/bin/env bash
 dialog --title "Ceph Disk Selection" \
     --ok-label "Select" \
@@ -182,7 +182,7 @@ EOF
 
     # Agregar cada opción de disco al script
     for ((i=0; i<${#dialog_options[@]}; i+=3)); do
-        echo -n "    \"${dialog_options[i]}\" \"${dialog_options[i+1]}\" ${dialog_options[i+2]} \" >> "$TEMP_SCREEN_SCRIPT"
+        echo -n "    \"${dialog_options[i]}\" \"${dialog_options[i+1]}\" ${dialog_options[i+2]} \"" >> "$TEMP_SCREEN_SCRIPT"
         echo >> "$TEMP_SCREEN_SCRIPT"
     done
 
@@ -196,7 +196,7 @@ EOF
     screen -q -r disk_session
     DIALOG_EXIT_CODE=$?
     
-    printf "[1A[K"
+    printf "\033[1A\033[K"
 
     # Si el usuario cancela
     if [ $DIALOG_EXIT_CODE -eq 1 ]; then
