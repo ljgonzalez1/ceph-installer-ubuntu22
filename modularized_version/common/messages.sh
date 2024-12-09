@@ -18,10 +18,12 @@ declare -x CROSS
 if [ "$SPECIAL_CHARACTER_SUPPORT" = true ]; then
   CHECK="✓"
   CROSS="✗"
+  WARN="!"
 
 else
   CHECK="●"
   CROSS="●"
+  WARN="●"
 fi
 
 
@@ -43,7 +45,7 @@ show_error() {
 }
 
 show_warn() {
-  print_status "!" "$COLOR_WARN" "$1"
+  print_status "${WARN}" "$COLOR_WARN" "$1"
 }
 
 crit_error() {
