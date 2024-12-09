@@ -6,46 +6,46 @@ setup_ansi_variables() {
     local -n r=$1  # Referencia al hash asociativo que se pasará
 
     # Reset
-    r[RESET]="[0m"
+    r[RESET]="\033[0m"
 
     # Colores estándar para fondo
-    r[BLUE_BG]="[44m"
-    r[CYAN_BG]="[46m"
-    r[RED_BG]="[41m"
-    r[BLACK_BG]="[40m"
-    r[WHITE_BG]="[47m"
-    r[TRANSPARENT_BG]="[49m"
-    r[YELLOW_BG]="[43m"
+    r[BLUE_BG]="\033[44m"
+    r[CYAN_BG]="\033[46m"
+    r[RED_BG]="\033[41m"
+    r[BLACK_BG]="\033[40m"
+    r[WHITE_BG]="\033[47m"
+    r[TRANSPARENT_BG]="\033[49m"
+    r[YELLOW_BG]="\033[43m"
 
     # Estilos de texto
-    r[BOLD]="[1m"
-    r[UNDERLINE]="[4m"
-    r[ITALIC]="[3m"
-    r[END_BOLD]="[22m"
-    r[END_UNDERLINE]="[24m"
-    r[END_ITALIC]="[23m"
+    r[BOLD]="\033[1m"
+    r[UNDERLINE]="\033[4m"
+    r[ITALIC]="\033[3m"
+    r[END_BOLD]="\033[22m"
+    r[END_UNDERLINE]="\033[24m"
+    r[END_ITALIC]="\033[23m"
 
     # Colores estándar para texto
-    r[BLUE_FG]="[34m"
-    r[CYAN_FG]="[36m"
-    r[RED_FG]="[31m"
-    r[BLACK_FG]="[30m"
-    r[WHITE_FG]="[37m"
-    r[TRANSPARENT_FG]="[39m"
-    r[YELLOW_FG]="[33m"
+    r[BLUE_FG]="\033[34m"
+    r[CYAN_FG]="\033[36m"
+    r[RED_FG]="\033[31m"
+    r[BLACK_FG]="\033[30m"
+    r[WHITE_FG]="\033[37m"
+    r[TRANSPARENT_FG]="\033[39m"
+    r[YELLOW_FG]="\033[33m"
 
     # Verificar soporte de 256 colores
     if tput colors 2>/dev/null | grep -q '^256$'; then
         # TrueColor o 256 colores disponibles
-        r[LIGHT_BLUE_BG]="[48;5;81m"       # Celeste estándar
-        r[VERY_LIGHT_BLUE_BG]="[48;5;159m" # Celeste pastel
-        r[DARK_BLUE_BG]="[48;5;17m"        # Azul oscuro
-        r[ORANGE_BG]="[48;5;214m"          # Naranja
+        r[LIGHT_BLUE_BG]="\033[48;5;81m"       # Celeste estándar
+        r[VERY_LIGHT_BLUE_BG]="\033[48;5;159m" # Celeste pastel
+        r[DARK_BLUE_BG]="\033[48;5;17m"        # Azul oscuro
+        r[ORANGE_BG]="\033[48;5;214m"          # Naranja
 
-        r[LIGHT_BLUE_FG]="[38;5;81m"       # Celeste estándar
-        r[VERY_LIGHT_BLUE_FG]="[38;5;159m" # Celeste pastel
-        r[DARK_BLUE_FG]="[38;5;17m"        # Azul oscuro
-        r[ORANGE_FG]="[38;5;214m"          # Naranja
+        r[LIGHT_BLUE_FG]="\033[38;5;81m"       # Celeste estándar
+        r[VERY_LIGHT_BLUE_FG]="\033[38;5;159m" # Celeste pastel
+        r[DARK_BLUE_FG]="\033[38;5;17m"        # Azul oscuro
+        r[ORANGE_FG]="\033[38;5;214m"          # Naranja
     else
         # Solo 16 colores disponibles
         r[LIGHT_BLUE_BG]="${r[CYAN_BG]}"          # Usar cyan como degradado
