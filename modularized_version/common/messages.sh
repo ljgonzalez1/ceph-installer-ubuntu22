@@ -15,16 +15,16 @@ declare -x END_ITALIC="\033[23m"
 declare -x CHECK
 declare -x CROSS
 
-#if [ "$SPECIAL_CHARACTER_SUPPORT" = true ]; then
+if [ "$SPECIAL_CHARACTER_SUPPORT" = true ]; then
 CHECK="✓"
 CROSS="✗"
 WARN="!"
 
-#else
-  #CHECK="●"
-  #CROSS="●"
-  #WARN="●"
-#fi
+else
+  CHECK="●"
+  CROSS="●"
+  WARN="●"
+fi
 
 
 print_status() {
