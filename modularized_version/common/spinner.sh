@@ -7,7 +7,7 @@ if [ "$SPECIAL_CHARACTER_SUPPORT" = true ]; then
     BRAILLE_SPINNER=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
 
 else
-    BRAILLE_SPINNER=("|" "/" "-" "\")
+    BRAILLE_SPINNER=("|" "/" "-" "\\")
 fi
 
 declare -x FRAME_DURATION=0.1
