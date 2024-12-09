@@ -47,5 +47,5 @@ stop_spinner() {
         wait "$SPINNER_PID" 2>/dev/null
         unset SPINNER_PID
     fi
-    printf "\r[K"
+    echo -ne "\r\033[2K"
 }
