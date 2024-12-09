@@ -48,5 +48,5 @@ stop_spinner() {
         unset SPINNER_PID
     fi
     printf "
-[K"
+\033[K"
 }

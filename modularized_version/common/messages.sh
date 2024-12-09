@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 # Colores y estilos
-declare -x RESET="[0m"
-declare -x BOLD="[1m"
-declare -x FG_WHITE="[1;37m"
-declare -x BG_BLACK="[40m"
-declare -x COLOR_OK="[1;32m"
-declare -x COLOR_ERROR="[1;31m"
-declare -x COLOR_WARN="[1;33m"
-declare -x COLOR_BLUE="[1;34m"
-declare -x ITALIC="[3m"
-declare -x END_ITALIC="[23m"
+declare -x RESET="\033[0m"
+declare -x BOLD="\033[1m"
+declare -x FG_WHITE="\033[1;37m"
+declare -x BG_BLACK="\033[40m"
+declare -x COLOR_OK="\033[1;32m"
+declare -x COLOR_ERROR="\033[1;31m"
+declare -x COLOR_WARN="\033[1;33m"
+declare -x COLOR_BLUE="\033[1;34m"
+declare -x ITALIC="\033[3m"
+declare -x END_ITALIC="\033[23m"
 
 declare -x CHECK
 declare -x CROSS
@@ -48,7 +48,7 @@ show_warn() {
 
 crit_error() {
   echo
-  echo -e "[47m[1;30m[[1;31m✗[1;30m][0m [47m[1;30mError crítico: el script ha fallado.[0m"
+  echo -e "\033[47m\033[1;30m[\033[1;31m✗\033[1;30m]\033[0m \033[47m\033[1;30mError crítico: el script ha fallado.\033[0m"
   echo
   exit 1
 }
