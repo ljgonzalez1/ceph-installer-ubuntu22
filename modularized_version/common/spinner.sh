@@ -23,8 +23,7 @@ cleanup() {
 trap cleanup SIGINT SIGTERM
 
 show_spinner() {
-    printf "
-${BOLD}[${COLOR_BLUE}%s${RESET}${BOLD}]${RESET} %s" "$1" "$2"
+    printf "${BOLD}[${COLOR_BLUE}%s${RESET}${BOLD}]${RESET} %s" "$1" "$2"
 }
 
 start_spinner() {
